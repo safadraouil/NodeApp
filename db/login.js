@@ -23,7 +23,7 @@ exports.Login = async (req, res) => {
       user &&
       (await (password &&
         user?.UserPassword &&
-        bcrypt.compare(password, user.UserPassword)))
+        bcrypt.compare(password, user?.UserPassword)))
     ) {
       // Create token
       const token = jwt.sign(
