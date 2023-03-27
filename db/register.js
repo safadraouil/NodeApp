@@ -35,7 +35,7 @@ exports.register = async (req, res) => {
     if (oldUser) {
       return res.status(409).send("User Already Exist. Please Login");
     }
-    encryptedPassword = await bcrypt.hash(UserPassword, 10);
+    encryptedPassword = await (UserPassword && bcrypt.hash(UserPassword, 10));
     const user = await userModel.UserModel.create({
       UserName,
       UserTel: parseInt(UserTel),
