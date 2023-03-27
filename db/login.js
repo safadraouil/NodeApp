@@ -19,7 +19,12 @@ exports.Login = async (req, res) => {
     const user = await userModel.UserModel.findOne(
       { UserName: Login } || { UserLogin: Login }
     );
-    if (user && (await bcrypt.compare(password, user.UserPassword))) {
+    if (
+      user &&
+      (await (password &&
+        user?.UserPassword &&
+        bcrypt.compare(password, user.UserPassword)))
+    ) {
       // Create token
       const token = jwt.sign(
         { user_id: user._id, Login: Login, UserType },
@@ -37,9 +42,8 @@ exports.Login = async (req, res) => {
     }
     res.status(400).send("Invalid Credentials");
   } catch (err) {
-     console.log(err);
+    console.log(err);
   }
- 
 };
 
- 
+exports.modules;
