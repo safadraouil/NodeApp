@@ -22,26 +22,34 @@ exports.Login = async (req, res) => {
       const user = await userModel.UserModel.findOne(
         { UserName: Login } || { UserLogin: Login }
       );
-      if (
-        user &&
-        (await (password &&
-          user?.UserPassword &&
-          bcrypt.compareSync(password, user?.UserPassword)))
-      ) {
-        // Create token
-        const token = jwt.sign(
-          { user_id: user._id, Login: Login, UserType },
-          "iamtryingtoaddsome",
-          {
-            expiresIn: "2h"
-          }
-        );
+      if (!user.length) {
+        throw createError(401, "That user does not exist");
+      }
 
-        // save user token
-        user.token = token;
+      if (!compareSync(password, user.password)) {
+        throw createError(401, "Wrong password");
+      } else {
+        if (
+          user &&
+          (await (password &&
+            user?.UserPassword &&
+            bcrypt.compareSync(password, user?.UserPassword)))
+        ) {
+          // Create token
+          const token = jwt.sign(
+            { user_id: user._id, Login: Login, UserType },
+            "iamtryingtoaddsome",
+            {
+              expiresIn: "2h"
+            }
+          );
 
-        // user
-        res.status(200).json(user);
+          // save user token
+          user.token = token;
+
+          // user
+          res.status(200).json(user);
+        }
       }
       res.status(400).send("Invalid Credentials");
     } catch (err) {
