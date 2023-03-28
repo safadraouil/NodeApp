@@ -1,6 +1,6 @@
 // ...
 const userModel = require("./Users");
-const { bcrypt } = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
@@ -49,7 +49,7 @@ exports.register = async (req, res) => {
       if (UserPassword === undefined) {
         res.status(400).send("All input is required");
       } else
-        encryptedPassword = await bcrypt.hashSync(
+        encryptedPassword = await bcrypt.hash(
           UserPassword,
           null,
           null,

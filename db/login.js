@@ -1,6 +1,6 @@
 // ...
 const userModel = require("./Users");
-const { bcrypt } = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config(`${process.env.SECRET_KEY}`);
@@ -37,7 +37,7 @@ exports.Login = async (req, res) => {
           password !== undefined &&
           user &&
           user?.UserPassword !== undefined &&
-          (await bcrypt.compareSync(password, user?.UserPassword))
+          (await bcrypt.compare(password, user?.UserPassword))
         ) {
           // Create token
           const token = jwt.sign(
