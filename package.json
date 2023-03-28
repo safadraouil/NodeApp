@@ -1,13 +1,17 @@
 {
   "name": "expressapplication",
+  "description": "a really cool app",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "8.9.4"
+  },
   "scripts": {
     "start": "node ./build/app.js",
     "build": "npm ci && tsc"
   },
   "dependencies": {
-    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
@@ -29,6 +33,5 @@
   "main": "app.js",
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }
