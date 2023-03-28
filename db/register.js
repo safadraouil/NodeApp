@@ -1,6 +1,6 @@
 // ...
 const userModel = require("./Users");
-const bcrypt = require("bcryptjs");
+//const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
@@ -48,7 +48,7 @@ exports.register = async (req, res) => {
 
       if (UserPassword === undefined) {
         res.status(400).send("All input is required");
-      } else
+      } /*  else
         encryptedPassword = await bcrypt.hash(
           UserPassword,
           null,
@@ -56,9 +56,9 @@ exports.register = async (req, res) => {
           (err, hash) => {
             if (err) return next(err);
             currentUser.password = hash;
-            next();
+            next(); 
           }
-        );
+        );*/
 
       const user = await userModel.UserModel.create({
         UserName,
