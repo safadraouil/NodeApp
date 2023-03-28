@@ -38,7 +38,10 @@ exports.register = async (req, res) => {
         return res.status(409).send("User Already Exist. Please Login");
       }
 
-      encryptedPassword = await (UserPassword && bcrypt.hash(UserPassword, 10));
+      if (!UserPassword) {
+        res.status(400).send("All input is required");
+      } else encryptedPassword = await bcrypt.hash(UserPassword, 10);
+
       const user = await userModel.UserModel.create({
         UserName,
         UserTel: parseInt(UserTel),

@@ -26,14 +26,14 @@ exports.Login = async (req, res) => {
         throw createError(401, "That user does not exist");
       }
 
-      if (!compareSync(password, user.password)) {
+      if (!user || !password || !user?.password) {
         throw createError(401, "Wrong password");
       } else {
         if (
+          password &&
           user &&
-          (await (password &&
-            user?.UserPassword &&
-            bcrypt.compareSync(password, user?.UserPassword)))
+          user?.UserPassword &&
+          (await bcrypt.compareSync(password, user?.UserPassword))
         ) {
           // Create token
           const token = jwt.sign(
