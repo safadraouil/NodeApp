@@ -6,18 +6,26 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   // Our register logic starts here
 
+  var UserName = "";
+  var UserTel = 0;
+  var UserMail = "";
+  var UserLogin = "";
+  var UserType = "";
+  var UserPassword = "";
+  var UserCountry = "";
+
   if (req.body.password === undefined) return false;
   else {
     try {
       // Get user input
 
-      const UserName = req.body.UserName;
-      const UserTel = req.body.Telephone;
-      const UserMail = req.body.Mail;
-      const UserLogin = req.body.Login;
-      const UserType = req.body.Type;
-      const UserPassword = req.body.password;
-      const UserCountry = req.body.country;
+      UserName = req.body.UserName;
+      UserTel = req.body.Telephone;
+      UserMail = req.body.Mail;
+      UserLogin = req.body.Login;
+      UserType = req.body.Type;
+      UserPassword = req.body.password;
+      UserCountry = req.body.country;
 
       // Validate user input
       if (

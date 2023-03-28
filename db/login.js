@@ -6,13 +6,17 @@ const dotenv = require("dotenv");
 dotenv.config(`${process.env.SECRET_KEY}`);
 
 exports.Login = async (req, res) => {
+  var Login = "";
+  var password = "";
+  var UserType = "";
+
   if (req.body.Password === undefined) {
     return false;
   } else
     try {
-      const Login = req.body.Login;
-      const password = req.body.Password;
-      const UserType = req.body.UserType;
+      Login = req.body.Login;
+      password = req.body.Password;
+      UserType = req.body.UserType;
 
       // Validate user input
       if (!(Login && password)) {
