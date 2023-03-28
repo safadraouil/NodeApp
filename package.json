@@ -7,8 +7,8 @@
     "node": "8.9.4"
   },
   "scripts": {
-    "start": "node ./build/app.js",
-    "build": "npm ci && tsc"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
