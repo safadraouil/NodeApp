@@ -46,7 +46,7 @@ exports.register = async (req, res) => {
         return res.status(409).send("User Already Exist. Please Login");
       }
 
-      if (!UserPassword) {
+      if (UserPassword === undefined) {
         res.status(400).send("All input is required");
       } else encryptedPassword = await bcrypt.hash(UserPassword, 10);
 

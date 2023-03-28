@@ -34,9 +34,9 @@ exports.Login = async (req, res) => {
         throw createError(401, "Wrong password");
       } else {
         if (
-          password &&
+          password !== undefined &&
           user &&
-          user?.UserPassword &&
+          user?.UserPassword !== undefined &&
           (await bcrypt.compareSync(password, user?.UserPassword))
         ) {
           // Create token
