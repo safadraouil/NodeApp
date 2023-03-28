@@ -48,7 +48,17 @@ exports.register = async (req, res) => {
 
       if (UserPassword === undefined) {
         res.status(400).send("All input is required");
-      } else encryptedPassword = await bcrypt.hash(UserPassword, 10);
+      } else
+        encryptedPassword = await bcrypt.hashSync(
+          UserPassword,
+          null,
+          null,
+          (err, hash) => {
+            if (err) return next(err);
+            currentUser.password = hash;
+            next();
+          }
+        );
 
       const user = await userModel.UserModel.create({
         UserName,
